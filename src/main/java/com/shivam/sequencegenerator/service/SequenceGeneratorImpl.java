@@ -18,6 +18,8 @@ import java.util.Objects;
 @Slf4j
 @Repository
 @RequiredArgsConstructor
+// To use this class as repository, we need to suffix with Impl for spring to use this implementation.
+// ref: https://docs.spring.io/spring-data/mongodb/reference/repositories/custom-implementations.html
 public class SequenceGeneratorImpl implements SequenceGenerator {
 
     private final MongoOperations mongoOperations;
