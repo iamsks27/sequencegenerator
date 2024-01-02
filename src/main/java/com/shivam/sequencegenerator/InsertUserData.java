@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 /**
  * @author sksingh created on 27/12/23
  */
@@ -37,17 +39,20 @@ public class InsertUserData implements CommandLineRunner {
         userRepository.insert(user2);
 
         // Testing if inserting the same primary key will throw an exception or not.
-        try {
-            User user3 = new User();
-            user3.setUserId(1L);
-            user3.setEmail("julie@gmail.com");
-            userRepository.insert(user3);
-        } catch (Exception e) {
-            log.error("Error occurred", e);
-        }
+        //        try {
+        //            User user3 = new User();
+        //            user3.setUserId(1L);
+        //            user3.setEmail("julie@gmail.com");
+        //            userRepository.insert(user3);
+        //        } catch (Exception e) {
+        //            // log.error("Error occurred", e);
+        //        }
 
-        for (User user : userRepository.findAll()) {
-            log.info("User: {}", new ObjectMapper().writeValueAsString(user));
-        }
+        Optional<User> byId = userRepository.findById(1L);
+        log.info("User: {} by Id: {}", new ObjectMapper().writeValueAsString(byId.get()), 1L);
+
+        //        for (User u: userRepository.findAll()) {
+        //            log.info("User: {}", new ObjectMapper().writeValueAsString(u));
+        //        }
     }
 }
